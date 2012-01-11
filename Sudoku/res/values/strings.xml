@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sudoku</string>
+    <string name="etykieta_kontynuacja">Kontynuuj</string>
+    <string name="etykieta_nowa_gra">Nowa gra</string>
+    <string name="etykieta_informacje">Informacje</string>
+    <string name="etykieta_wyjscie">Wyjście</string>
+    <string name="main_app_title">Sudoku for Android</string>
+    <string name="info_title">O grze</string>
+    <string name="info_text_body">\
+<b>Sudoku</b> jest grą logiczną, polagającą na właściwym rozmieszczeniu cyfr.
+Zadaniem jest uzupełnienie częściowo wypełnionej siatki o rozmiarach NxN pól
+w taki sposób, aby w każdym wierszu, w każdej kolumnie oraz w każdym kwadracie 
+o rozmiarze 3x3 pola (zwanym również <i>blokiem</i>) pojawiła się dokładnie jedna
+cyfra z przedziału 1 do 9.
+<b>Cyfry w wymienionych obszarach nie mogą się powtarzać.</b>
+
+Aplikacja została napisana w oparciu o książkę pt. <b>Hello ANDROID. Programowanie
+na platformę Google dla urządzeń mobilnych.</b>
+    </string>
+    <string name="label_settings">Ustawienia...</string>
+    <string name="title_settings">Ustawienia gry Sudoku</string>
+    <string name="game_setting_save_title">Zapisz sesję</string>
+    <string name="game_settings_title">Rozgryfka</string>
+    <string name="shorcut_settings">s</string>
+    <string name="title_music">Muzyka</string>
+    <string name="reasume_music">Odtwarza muzykę w tle</string>
+    <string name="title_hints">Podpowiedzi</string>
+    <string name="reasume_hints">Wyświetlenie podpowiedzi w trakcie gry</string>
+    <string name="title_new_game">Nowa gra</string>
+    <string name="game_level_simple">Poziom łatwy</string>
+    <string name="game_level_middle">Poziom umiarkowanie trudny</string>
+    <string name="game_level_hard">Poziom trudny</string>
+    <string name="game_header">Gra</string>
+    <string name="game_over">Brak ruchów</string>
+    <string name="title_keyboard">Klawiatura</string>
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:stretchColumns="*" >
+
+    <TableRow>
+        <Button 
+            android:id="@+id/keyboard_1" 
+            android:text="1"/>
+        <Button 
+            android:id="@+id/keyboard_2"
+            android:text="2" />
+        <Button 
+            android:id="@+id/keyboard_3"
+            android:text="3"/>"
+    </TableRow>
+    <TableRow>
+        <Button 
+            android:id="@+id/keyboard_4" 
+            android:text="4"/>
+        <Button 
+            android:id="@+id/keyboard_5"
+            android:text="5" />
+        <Button 
+            android:id="@+id/keyboard_6"
+            android:text="6"/>
+    </TableRow>
+    <TableRow>
+        <Button 
+            android:id="@+id/keyboard_7" 
+            android:text="7"/>
+        <Button 
+            android:id="@+id/keyboard_8"
+            android:text="8" />
+        <Button 
+            android:id="@+id/keyboard_9"
+            android:text="9"/>
+    </TableRow>
+
+</TableLayout>

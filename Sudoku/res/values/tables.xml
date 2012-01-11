@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="difficult">
+        <item>@string/game_level_simple</item>
+        <item>@string/game_level_middle</item>
+        <item>@string/game_level_hard</item>
+    </array>
+    
+</resources>
