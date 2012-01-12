@@ -18,6 +18,7 @@ import android.view.View;
  * @version 0.2
  *
  */
+
 public class ViewPuzzle extends View {
 
 	private static final String LOG_MARKER = "ViewPuzzle";
