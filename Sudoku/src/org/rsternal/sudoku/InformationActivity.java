@@ -5,7 +5,9 @@ import android.os.Bundle;
 
 /**
  * 
- * @author Robert Sternal (bobie), Grudzieñ 2011, Poznañ
+ * @author Robert Sternal (bobie),
+ * @since December 2011
+ * @version 0.2
  *
  */
 public class InformationActivity extends Activity {

@@ -11,6 +11,13 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
+/**
+ * 
+ * @author Robert Sternal (aka bobie)
+ * @since December 2011.
+ * @version 0.2
+ *
+ */
 public class ViewPuzzle extends View {
 
 	private static final String LOG_MARKER = "ViewPuzzle";

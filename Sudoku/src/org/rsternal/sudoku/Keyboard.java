@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 
+/**
+ * 
+ * @author Robert Sternal (aka bobie)
+ * @since December 2011
+ * @version 0.2
+ *
+ */
 public class Keyboard extends Dialog {
-
-	private static final String LOG_MARKER = "SUDOKY_KEYBOARD";
 	
 	private final View[] keys = new View[9];
 	private final ViewPuzzle vPuzzle;

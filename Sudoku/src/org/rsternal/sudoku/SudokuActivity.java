@@ -5,16 +5,20 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+/**
+ * 
+ * @author Robert Sternal (aka bobie)
+ * @since December 2011.
+ * @version 0.2
+ *
+ */
 public class SudokuActivity extends Activity implements OnClickListener  {
-	
-	private static final String LOG_TAG = "### {SudokuActivitiy} # ";
 	
     /** Called when the activity is first created. */
     @Override
@@ -79,16 +83,12 @@ public class SudokuActivity extends Activity implements OnClickListener  {
 						
 						public void onClick(DialogInterface dialog, int which) {
 							runGame(which);
-							
 						}
+
 					}).show();
 	}
 	
 	private void runGame(int i) {
-		Log.d(SudokuActivity.LOG_TAG, "[ " 
-				+ System.currentTimeMillis() 
-				+ " ] Klikniêto ... ( " 
-				+ i + " ).");
 		Intent intent = new Intent(SudokuActivity.this, GameActivity.class);
 		intent.putExtra(GameActivity.GAME_LEVEL_KEY, i);
 		startActivity(intent);

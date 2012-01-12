@@ -11,6 +11,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.widget.Toast;
 
+/**
+ * 
+ * @author Robert Sternal (aka bobie)
+ * @since December 2011
+ * @version 0.2
+ *
+ */
 public class GameActivity extends Activity {
 
 	public static enum GAME_LEVEL {
@@ -244,6 +251,5 @@ public class GameActivity extends Activity {
 	private void setBox(int x, int y, int value) {
 		this.puzzles[y * 9 + x] = value;
 	}
-	
 	
 }
