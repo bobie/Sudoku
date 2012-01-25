@@ -45,7 +45,7 @@ public class SudokuActivity extends Activity implements OnClickListener  {
 			startActivity(i);
 			break;
 		case R.id.btn_continue:
-			runGame(GameActivity.PREF_PUZZLE_CONTINULE);
+			runGame(GameActivity.PREF_PUZZLE_CONTINUE);
 			break;
 		default:
 		}

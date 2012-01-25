@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,28 +19,15 @@ import android.widget.Toast;
  */
 public class GameActivity extends Activity {
 
-	public static enum GAME_LEVEL {
-		LOW(0), 
-		MEDIUM(1), 
-		HIGHT(2);
-		
-		private int level = 0;
-		
-		private GAME_LEVEL(int level) {
-			this.level = level;
-		}
-		
-		public int getLevel() {
-			return this.level;
-		}
-	};
-	
 	public static final String PREF_PUZZLE_DATA_KEY = "puzzle_game_data";
 	public static final String PREF_PUZZLE_GAME_TITLE_KEY = "puzzle_game_title";
 	public static final String GAME_LEVEL_KEY = "game_level_key";
-	public static final int PREF_PUZZLE_CONTINULE = -1;
+	public static final int PREF_PUZZLE_CONTINUE = -1;
 	
-	private static final String LOG_MARKER = "GameActivity";
+	private static final int GAME_LEVEL_SIMPLE = 0;
+	private static final int GAME_LEVEL_MEDIUM = 1;
+	private static final int GAME_LEVEL_HIGHT = 3;
+	
 	private static final String SH_PREF_FILE = "sudoku_pref_file.pref";
 	private final String PUZZLE_SIMPLE_INIT_DATA =
 		"360000000004230800000004200" +
@@ -65,23 +51,17 @@ public class GameActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.shPref = getSharedPreferences(GameActivity.SH_PREF_FILE, MODE_PRIVATE);
-		Log.d(GameActivity.LOG_MARKER, "fire onCreate(...)");
 		
 		gameLevel = getIntent().getIntExtra(GameActivity.GAME_LEVEL_KEY, 
-				GameActivity.GAME_LEVEL.LOW.getLevel());
+				GameActivity.GAME_LEVEL_SIMPLE);
 		
-		if (gameLevel == GameActivity.PREF_PUZZLE_CONTINULE) {
+		if (gameLevel == GameActivity.PREF_PUZZLE_CONTINUE) {
 			this.setTitle(this.shPref.getString(GameActivity.PREF_PUZZLE_GAME_TITLE_KEY, 
 					this.getTitle() + " / " + getResources().getString(R.string.game_level_simple)));
 			this.puzzles = getPuzzleDaraAsArray(this.shPref.getString(GameActivity.PREF_PUZZLE_DATA_KEY, 
 					PUZZLE_SIMPLE_INIT_DATA));
 		} else {
-			for (GameActivity.GAME_LEVEL l : GameActivity.GAME_LEVEL.values()) {
-				if (l.getLevel() == gameLevel) {
-					this.puzzles = getPuzzles(l);
-					break;
-				}
-			}
+			this.puzzles = getPuzzles(gameLevel);
 		
 			String strLevel = "";
 			switch(gameLevel) {
@@ -122,11 +102,11 @@ public class GameActivity extends Activity {
 		return true;
 	}
 
-	private int[] getPuzzles(GameActivity.GAME_LEVEL level) {
-		switch(level.getLevel()) {
-		case 0: return getPuzzleDaraAsArray(PUZZLE_SIMPLE_INIT_DATA);
-		case 1:	return getPuzzleDaraAsArray(PUZZLE_MEDIUM_INIT_DATA);
-		case 2: return getPuzzleDaraAsArray(PUZZLE_HARD_INIT_DATA);
+	private int[] getPuzzles(int level) {
+		switch(level) {
+		case GameActivity.GAME_LEVEL_SIMPLE: return getPuzzleDaraAsArray(PUZZLE_SIMPLE_INIT_DATA);
+		case GameActivity.GAME_LEVEL_MEDIUM: return getPuzzleDaraAsArray(PUZZLE_MEDIUM_INIT_DATA);
+		case GameActivity.GAME_LEVEL_HIGHT: return getPuzzleDaraAsArray(PUZZLE_HARD_INIT_DATA);
 		default: return getPuzzleDaraAsArray(PUZZLE_SIMPLE_INIT_DATA);
 		}
 	}
@@ -141,8 +121,12 @@ public class GameActivity extends Activity {
 	
 	protected void showKeyboardOrError(int x, int y) {
 		int[] boxes = getUsedBoxes(x, y);
-		if (boxes.length == 9) {
-			Toast toast = Toast.makeText(this, R.string.game_over, Toast.LENGTH_SHORT);
+		if (boxes.length == 9 || isCurrentBoxFromInitial(x, y)) {
+			Toast toast = null;
+			if (boxes.length == 9)
+				toast = Toast.makeText(this, R.string.game_over, Toast.LENGTH_SHORT);
+			else
+				toast = Toast.makeText(this, R.string.game_incorrect_motion, Toast.LENGTH_SHORT);
 			toast.setGravity(Gravity.CENTER, 0, 0);
 			toast.show();
 		} else {
@@ -250,6 +234,14 @@ public class GameActivity extends Activity {
 	
 	private void setBox(int x, int y, int value) {
 		this.puzzles[y * 9 + x] = value;
+	}
+	
+	private boolean isCurrentBoxFromInitial(int x, int y) {
+		int tmpBox = getPuzzles(gameLevel)[y * 9 + x];
+		if (getBox(x, y) == tmpBox && tmpBox != 0)
+			return true;
+		
+		return false;
 	}
 	
 }

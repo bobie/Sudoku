@@ -33,6 +33,7 @@ na platformę Google dla urządzeń mobilnych.</b>
     <string name="game_level_hard">Poziom trudny</string>
     <string name="game_header">Gra</string>
     <string name="game_over">Brak ruchów</string>
+    <string name="game_incorrect_motion">Nie można zmieniać początkowego rozdania rundy.</string>
     <string name="title_keyboard">Klawiatura</string>
 
 </resources>
