@@ -49,7 +49,7 @@ public class ViewPuzzle extends View {
 	}
 	
 	private void getBox(int x, int y, Rect r) {
-		rect.set((int)(x * this.width), (int)(y * this.height),
+		r.set((int)(x * this.width), (int)(y * this.height),
 				(int)(x * this.width + this.width), (int)(y * this.height + this.height));
 	}
 
@@ -103,6 +103,24 @@ public class ViewPuzzle extends View {
 		}
 		
 		// TODO: Rysuje podpowiedzi
+		Paint backgroudHints = new Paint();
+		int[] colors = {
+			getResources().getColor(R.color.puzzle_hint_0),
+			getResources().getColor(R.color.puzzle_hint_1),
+			getResources().getColor(R.color.puzzle_hint_2)
+		};
+		Rect rBox = new Rect();
+		for (int i=0; i<9; i++) {
+			for (int j=0; j<9; j++) {
+				int otherMovments = 9 - game.getUsedBoxes(i, j).length;
+				if (otherMovments < colors.length) {
+					getBox(i, j, rBox);
+					backgroudHints.setColor(colors[otherMovments]);
+					canvas.drawRect(rBox, backgroudHints);
+				}
+			}
+		}
+		
 		// TODO: Rysuje wybran¹ wartoœæ
 		Paint selectedBox = new Paint();
 		selectedBox.setColor(getResources().getColor(R.color.puzzle_selected));

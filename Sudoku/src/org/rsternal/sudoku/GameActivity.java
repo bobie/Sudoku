@@ -19,6 +19,7 @@ import android.widget.Toast;
  */
 public class GameActivity extends Activity {
 
+	public static final String PREF_PUZZLE_GAME_LEVEL = "game_level";
 	public static final String PREF_PUZZLE_DATA_KEY = "puzzle_game_data";
 	public static final String PREF_PUZZLE_GAME_TITLE_KEY = "puzzle_game_title";
 	public static final String GAME_LEVEL_KEY = "game_level_key";
@@ -56,6 +57,7 @@ public class GameActivity extends Activity {
 				GameActivity.GAME_LEVEL_SIMPLE);
 		
 		if (gameLevel == GameActivity.PREF_PUZZLE_CONTINUE) {
+			this.gameLevel = this.shPref.getInt(GameActivity.PREF_PUZZLE_GAME_LEVEL, 0);
 			this.setTitle(this.shPref.getString(GameActivity.PREF_PUZZLE_GAME_TITLE_KEY, 
 					this.getTitle() + " / " + getResources().getString(R.string.game_level_simple)));
 			this.puzzles = getPuzzleDaraAsArray(this.shPref.getString(GameActivity.PREF_PUZZLE_DATA_KEY, 
@@ -83,11 +85,13 @@ public class GameActivity extends Activity {
 		vPuzzle.requestFocus();
 	}
 	
+	
 	@Override
 	protected void onPause() {
 		super.onPause();
 		
 		final Editor ed = this.shPref.edit();
+		ed.putInt(GameActivity.PREF_PUZZLE_GAME_LEVEL, this.gameLevel);
 		ed.putString(GameActivity.PREF_PUZZLE_DATA_KEY, getPuzzleDataAsString(puzzles));
 		ed.putString(GameActivity.PREF_PUZZLE_GAME_TITLE_KEY, this.getTitle().toString());
 		ed.commit();
@@ -121,7 +125,7 @@ public class GameActivity extends Activity {
 	
 	protected void showKeyboardOrError(int x, int y) {
 		int[] boxes = getUsedBoxes(x, y);
-		if (boxes.length == 9 || isCurrentBoxFromInitial(x, y)) {
+		if (boxes.length == 9 || isCurrentBoxFromInitialDigits(x, y)) {
 			Toast toast = null;
 			if (boxes.length == 9)
 				toast = Toast.makeText(this, R.string.game_over, Toast.LENGTH_SHORT);
@@ -236,7 +240,7 @@ public class GameActivity extends Activity {
 		this.puzzles[y * 9 + x] = value;
 	}
 	
-	private boolean isCurrentBoxFromInitial(int x, int y) {
+	private boolean isCurrentBoxFromInitialDigits(int x, int y) {
 		int tmpBox = getPuzzles(gameLevel)[y * 9 + x];
 		if (getBox(x, y) == tmpBox && tmpBox != 0)
 			return true;
